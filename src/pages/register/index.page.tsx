@@ -47,16 +47,16 @@ export default function Register() {
         name: data.name,
         username: data.username,
       })
+
+      await router.push('/register/connect-calendar')
     } catch (err) {
       if (err instanceof AxiosError && err?.response?.data?.message) {
         alert(err.response.data.message)
         return
       }
-
       console.error(err)
     }
   }
-
   return (
     <Container>
       <Header>
@@ -67,7 +67,6 @@ export default function Register() {
         </Text>
         <MultiStep size={4} currentStep={1} />
       </Header>
-
       <Form as="form" onSubmit={handleSubmit(handleRegister)}>
         <label>
           <Text size="sm">Nome de usuário</Text>
