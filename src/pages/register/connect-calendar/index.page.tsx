@@ -9,13 +9,14 @@ import { AuthError, ConnectBox, ConnectItem } from './styles'
 export default function Register() {
   const session = useSession()
   const router = useRouter()
-
   const hasAuthError = !!router.query.error
   const isSignedId = session.status === 'authenticated'
 
   async function handleConnectCalendar() {
     await signIn('google')
   }
+
+  console.log(session)
 
   return (
     <Container>
@@ -46,14 +47,12 @@ export default function Register() {
             </Button>
           )}
         </ConnectItem>
-
         {hasAuthError && (
           <AuthError size="sm">
             Falha ao se conectar ao Google, verifique se você habilitou as
             permissões de acesso ao Google Calendar
           </AuthError>
         )}
-
         <Button type="submit" disabled={!isSignedId}>
           Próximo passo
           <ArrowRight />
