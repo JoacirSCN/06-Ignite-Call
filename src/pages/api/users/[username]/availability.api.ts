@@ -53,7 +53,7 @@ export default async function handler(
     },
   )
 
-  const blockedTimes = await prisma.scheduling.findMany({
+  /*   const blockedTimes = await prisma.scheduling.findMany({
     select: {
       date: true,
     },
@@ -64,9 +64,9 @@ export default async function handler(
         lte: referenceDate.set('hour', endHour).toDate(),
       },
     },
-  })
+  }) */
 
-  const availableTimes = possibleTimes.filter((time) => {
+  /*   const availableTimes = possibleTimes.filter((time) => {
     const isTimeBlocked = blockedTimes.some(
       (blockedTime) => blockedTime.date.getHours() === time,
     )
@@ -74,6 +74,25 @@ export default async function handler(
     const isTimeInPast = referenceDate.set('hour', time).isBefore(new Date())
 
     return !isTimeBlocked && !isTimeInPast
+  })
+
+  return res.json({ possibleTimes, availableTimes }) */
+
+  const blockedTimes = await prisma.scheduling.findMany({
+    select: {
+      date: true,
+    },
+    where: {
+      user_id: user.id,
+      date: {
+        gte: referenceDate.startOf('day').toDate(),
+        lte: referenceDate.endOf('day').toDate(),
+      },
+    },
+  })
+
+  const availableTimes = blockedTimes.map((schedules) => {
+    return schedules.date
   })
 
   return res.json({ possibleTimes, availableTimes })
