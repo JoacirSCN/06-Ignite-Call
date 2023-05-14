@@ -91,9 +91,9 @@ export default async function handler(
     },
   })
 
-  const availableTimes = blockedTimes.map((schedules) => {
+  const unavailableTimes = blockedTimes.map((schedules) => {
     return schedules.date
   })
 
-  return res.json({ possibleTimes, availableTimes })
+  return res.json({ possibleTimes, unavailableTimes })
 }
