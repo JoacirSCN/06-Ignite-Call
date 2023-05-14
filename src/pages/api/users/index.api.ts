@@ -18,10 +18,6 @@ export default async function handler(
     },
   })
 
-  if (typeof userExists !== 'string') {
-    return res.status(404).send('invalid username')
-  }
-
   if (userExists) {
     return res.status(400).json({
       message: 'Username already taken.',

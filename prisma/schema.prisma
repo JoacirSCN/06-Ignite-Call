@@ -11,7 +11,7 @@ datasource db {
 model User {
   id            String             @id @default(uuid())
   username      String             @unique
-  name          String
+  name          String             @unique
   bio           String?            @db.Text
   email         String?            @unique
   avatar_url    String?
@@ -70,7 +70,7 @@ model UserTimeInterval {
 model Scheduling {
   id           String   @id @default(uuid())
   date         DateTime
-  name         String
+  name         String 
   email        String
   observations String?
   created_at   DateTime @default(now())

@@ -1,3 +1,9 @@
+/*
+  Warnings:
+
+  - A unique constraint covering the columns `[name]` on the table `users` will be added. If there are existing duplicate values, this will fail.
+
+*/
 -- DropForeignKey
 ALTER TABLE `accounts` DROP FOREIGN KEY `accounts_user_id_fkey`;
 
@@ -9,6 +15,9 @@ ALTER TABLE `sessions` DROP FOREIGN KEY `sessions_user_id_fkey`;
 
 -- DropForeignKey
 ALTER TABLE `user_time_intervals` DROP FOREIGN KEY `user_time_intervals_user_id_fkey`;
+
+-- CreateIndex
+CREATE UNIQUE INDEX `users_name_key` ON `users`(`name`);
 
 -- RenameIndex
 ALTER TABLE `accounts` RENAME INDEX `accounts_user_id_fkey` TO `accounts_user_id_idx`;
