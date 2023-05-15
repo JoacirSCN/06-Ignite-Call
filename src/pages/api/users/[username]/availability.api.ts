@@ -48,7 +48,7 @@ export default async function handler(
 
   const startHour = time_start_in_minutes / 60
   const endHour = time_end_in_minutes / 60
-  
+
   const possibleTimes = Array.from({ length: endHour - startHour }).map(
     (_, i) => {
       return startHour + i
